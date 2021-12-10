@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Default</title>
+<link rel="stylesheet" href="bootstrap-5.1.1-dist/css/bootstrap.min.css" />
+<script src="Jquery/jquery-3.6.0.min.js"></script>
+<script src="bootstrap-5.1.1-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-8">
+				<h1>流水帳管理系統</h1>
+			</div>
+			<div class="col-4">
+				<a href="">登入系統</a>
+			</div>
+			<br>
+			<div class="col-8">
+				<p th:text="'初次記帳 : ' +${firstRecord}"/>
+				<hr>
+				<p th:text="'最後記帳 : ' +${lastRecord}"/>			
+				<hr>
+				<p th:text="'記帳數量 : ' +'共 '+${recordCount}+' 筆'"/>
+				<hr>
+				<p th:text="'會員數 : ' +'共 '+${memberCount}+' 人'"/>
+				<!-- <table>
+					<tr th:each="item : ${firstRecord}">
+						<th>初次記帳:</th>
+						<th th:text="${item.CREATEDATE}"></th>
+					</tr>
+					<tr th:each="item : ${lastRecord}">
+						<th>最後記帳:</th>
+						<th th:text="${item.CREATEDATE}"></th>
+					</tr>
+					<tr th:each="item : ${accountingCount}">
+						<th>記帳數量:</th>
+						<th th:text="|共${item}筆|"></th>
+					</tr>
+					<tr th:each="item : ${memberCount}">
+						<th>會員數:</th>
+						<th th:text="|共${item}人|"></th>
+					</tr>
+				</table> -->
+			</div>
+			<div class="col-4"></div>
+		</div>
+	</div>
+</body>
+</html>
