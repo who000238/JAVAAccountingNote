@@ -18,14 +18,15 @@
 			</div>
 			<br>
 			<div class="col-8">
-				<p th:text="'初次記帳 : ' +${firstRecord}"/>
+				<!-- <p th:text="'初次記帳 : ' +${firstRecord}"/>
 				<hr>
 				<p th:text="'最後記帳 : ' +${lastRecord}"/>			
 				<hr>
 				<p th:text="'記帳數量 : ' +'共 '+${recordCount}+' 筆'"/>
 				<hr>
-				<p th:text="'會員數 : ' +'共 '+${memberCount}+' 人'"/>
-				<!-- <table>
+				<p th:text="'會員數 : ' +'共 '+${memberCount}+' 人'"/> -->
+				
+			<table >
 					<tr th:each="item : ${firstRecord}">
 						<th>初次記帳:</th>
 						<th th:text="${item.CREATEDATE}"></th>
@@ -34,15 +35,15 @@
 						<th>最後記帳:</th>
 						<th th:text="${item.CREATEDATE}"></th>
 					</tr>
-					<tr th:each="item : ${accountingCount}">
+					<tr>
 						<th>記帳數量:</th>
-						<th th:text="|共${item}筆|"></th>
+						<th th:text="|共${recordCount}筆|"></th>
 					</tr>
-					<tr th:each="item : ${memberCount}">
+					<tr>
 						<th>會員數:</th>
-						<th th:text="|共${item}人|"></th>
+						<th th:text="|共${memberCount}人|"></th>
 					</tr>
-				</table> -->
+				</table>
 			</div>
 			<div class="col-4"></div>
 		</div>
