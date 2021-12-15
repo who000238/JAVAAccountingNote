@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
 <title>登入頁</title>
@@ -8,7 +9,8 @@
 <script src="bootstrap-5.1.1-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<form action="" class="container">
+	<form action="#" th:action="@{/Login}" th:object="${user}"
+		method="post" style="margin:0 auto" class="container">
 		<div class="row">
 			<div class="col-12">
 				<h1>流水帳管理系統</h1>
@@ -20,16 +22,17 @@
 				<span>Account</span>
 			</div>
 			<div class="col-11">
-				<input type="text">
+				<input type="text" name="account" class="form-control" maxlength="16" required>
 			</div>
 			<div class="col-1">
 				<span>PWD</span>
 			</div>
 			<div class="col-11">
-				<input type="text">
+				<input type="password" name="password" class="form-control"  maxlength="16" required>
 			</div>
 			<div class="col-12">
-				<input type="submit" value="Login">
+			 <p style="color:red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+				<input type="submit" value="Login" class="btn btn-primary">
 			</div>
 		</div>
 	</form>

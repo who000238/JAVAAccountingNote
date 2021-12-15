@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
 <title>流水帳列表頁</title>
@@ -12,7 +13,7 @@
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="index.html">流水帳管理系統</a>
+		<a class="navbar-brand ps-3" href="AccountingList">流水帳管理系統</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
 			id="sidebarToggle" href="#!">
@@ -29,7 +30,8 @@
 				</button>
 			</div>
 		</form>
-		<input type="image" value="test" src="Image/User.jpg" style="width:45px">
+		<input type="image" value="test" src="Image/User.jpg"
+			style="width: 45px">
 	</nav>
 	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
@@ -38,25 +40,23 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">管理者後台</div>
-						<a class="nav-link" href="index.html">
+						<a class="nav-link" href="UserList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 會員管理
 						</a>
 						<div class="sb-sidenav-menu-heading">後台管理</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapseLayouts" aria-expanded="false"
-							aria-controls="collapseLayouts">
+						<a class="nav-link collapsed" href="UserProfile">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 個人資訊
 						</a>
 						<div class="sb-sidenav-menu-heading">流水帳紀錄</div>
-						<a class="nav-link" href="charts.html">
+						<a class="nav-link" href="AccountingDetail">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 流水帳管理
-						</a> <a class="nav-link" href="tables.html">
+						</a> <a class="nav-link" href="CategoryList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-table"></i>
 							</div> 流水帳分類管理
@@ -72,7 +72,7 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="row">
-				<div class="col-12">
+					<div class="col-12">
 						<h3>流水帳管理</h3>
 					</div>
 					<div class="col-12">
@@ -84,94 +84,95 @@
 						</nav>
 					</div>
 					<div class="col-12">
-					<input type="submit" value="Add">
-					<input type="submit" value="Del">
-					&nbsp;&nbsp;
-					<span>小計---元</span>
+						<form action="#" th:action="@{/AccountingDetail}"
+							th:object="${user}">
+							<input type="submit" value="Add" />
+						</form>
+						<input type="submit" value="Del"> &nbsp;&nbsp; <span>小計---元</span>
 					</div>
 					<div class="col-12">
-					<div class="container-fluid px-4">
-                     
-          
-                    
-                        <div class="card mb-4">
-                       
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>  </th>
-                                            <th>建立日期</th>
-                                            <th>分類</th>
-                                            <th>收/支</th>
-                                            <th>金額</th>
-                                            <th>標題</th>
-                                            <th>Act</th>
-                                        </tr>
-                                    </thead>
-                             
-                                    <tbody>
-                                        <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>2021/12/1</td>
-                                            <td>分類1</td>
-                                            <td>支出</td>
-                                            <td>$320,800</td>
-                                            <td>購物</td>
-                                            <td><a href="#">Edit</a></td>
-                                        </tr>
-                                         <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>2021/12/1</td>
-                                            <td>分類1</td>
-                                            <td>支出</td>
-                                            <td>$320,800</td>
-                                            <td>購物</td>
-                                            <td><a href="#">Edit</a></td>
-                                        </tr> 
-                                         <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>2021/12/1</td>
-                                            <td>分類1</td>
-                                            <td>支出</td>
-                                            <td>$320,800</td>
-                                            <td>購物</td>
-                                            <td><a href="#">Edit</a></td>
-                                        </tr> 
-                                         <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>2021/12/1</td>
-                                            <td>分類1</td>
-                                            <td>支出</td>
-                                            <td>$320,800</td>
-                                            <td>購物</td>
-                                            <td><a href="#">Edit</a></td>
-                                        </tr> 
-                                         <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>2021/12/1</td>
-                                            <td>分類1</td>
-                                            <td>支出</td>
-                                            <td>$320,800</td>
-                                            <td>購物</td>
-                                            <td><a href="#">Edit</a></td>
-                                        </tr> 
-                                         <tr>
-                                            <td><input type="checkbox"></td>
-                                            <td>2021/12/1</td>
-                                            <td>分類1</td>
-                                            <td>支出</td>
-                                            <td>$320,800</td>
-                                            <td>購物</td>
-                                            <td><a href="#">Edit</a></td>
-                                        </tr>  
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+						<div class="container-fluid px-4">
+
+
+
+							<div class="card mb-4">
+
+								<div class="card-body">
+									<table id="datatablesSimple">
+										<thead>
+											<tr>
+												<th></th>
+												<th>建立日期</th>
+												<th>分類</th>
+												<th>收/支</th>
+												<th>金額</th>
+												<th>標題</th>
+												<th>Act</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td><input type="checkbox"></td>
+												<td>2021/12/1</td>
+												<td>分類1</td>
+												<td>支出</td>
+												<td>$320,800</td>
+												<td>購物</td>
+												<td><a href="#">Edit</a></td>
+											</tr>
+											<tr>
+												<td><input type="checkbox"></td>
+												<td>2021/12/1</td>
+												<td>分類1</td>
+												<td>支出</td>
+												<td>$320,800</td>
+												<td>購物</td>
+												<td><a href="#">Edit</a></td>
+											</tr>
+											<tr>
+												<td><input type="checkbox"></td>
+												<td>2021/12/1</td>
+												<td>分類1</td>
+												<td>支出</td>
+												<td>$320,800</td>
+												<td>購物</td>
+												<td><a href="#">Edit</a></td>
+											</tr>
+											<tr>
+												<td><input type="checkbox"></td>
+												<td>2021/12/1</td>
+												<td>分類1</td>
+												<td>支出</td>
+												<td>$320,800</td>
+												<td>購物</td>
+												<td><a href="#">Edit</a></td>
+											</tr>
+											<tr>
+												<td><input type="checkbox"></td>
+												<td>2021/12/1</td>
+												<td>分類1</td>
+												<td>支出</td>
+												<td>$320,800</td>
+												<td>購物</td>
+												<td><a href="#">Edit</a></td>
+											</tr>
+											<tr>
+												<td><input type="checkbox"></td>
+												<td>2021/12/1</td>
+												<td>分類1</td>
+												<td>支出</td>
+												<td>$320,800</td>
+												<td>購物</td>
+												<td><a href="#">Edit</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
-					
+
 				</div>
 			</main>
 			<footer class="py-4 bg-light mt-auto">
