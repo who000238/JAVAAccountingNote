@@ -39,6 +39,7 @@ public class LoginController {
 			
 			if(userAcc.equals(account)&& userPwd.equals(password)) {
 				session.setAttribute("loginLevel", loginRepository.doLogin(account).USERLEVEL);
+				session.setAttribute("userid", loginRepository.doLogin(account).getID());
 				return "UserProfile";
 			}
 		    else {

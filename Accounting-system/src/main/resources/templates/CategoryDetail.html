@@ -30,8 +30,19 @@
 				</button>
 			</div>
 		</form>
-		<input type="image" value="test" src="Image/User.jpg"
-			style="width: 45px">
+		<form th:action="@{/Logout}">
+			<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+					role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+						class="fas fa-user fa-fw"
+						th:style="'color:' + @{(${session.loginLevel == 0} ? 'dodgerblue' : 'white')} + ''"></i></a>
+					<ul class="dropdown-menu dropdown-menu-end"
+						aria-labelledby="navbarDropdown">
+						<li><button type="submit" class="dropdown-item">登出</button></li>
+					</ul></li>
+			</ul>
+		</form>
 	</nav>
 	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
@@ -83,20 +94,18 @@
 							</ol>
 						</nav>
 					</div>
-					<div class="col-1">
-						<span>標題</span>
-					</div>
-					<div class="col-11">
-						<textarea cols="20" rows="1"></textarea>
-					</div>
-					<div class="col-1">
-						<span>備註</span>
-					</div>
-					<div class="col-11">
-						<textarea cols="20" rows="5"></textarea>
-					</div>
 					<div class="col-12">
-						<input type="submit" value="Save">
+						<form th:action="@{/CategoryDetail}" method="post"
+							style="margin: 0 auto" class="container">
+							<table>
+								<tr>
+									<td>標題 <input type="text" name="Title" id="Title"
+										th:value="${Title}"> <br /> <br /> 備註 <textarea
+											rows="2" cols="20" name="Inner" id="Inner" th:text="${Inner}"></textarea></td>
+								</tr>
+							</table>
+							<input type="submit" name="Save" value="Save" id="Save">
+						</form>
 					</div>
 				</div>
 			</main>

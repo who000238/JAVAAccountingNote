@@ -31,8 +31,19 @@
 				</button>
 			</div>
 		</form>
-		<input type="image" value="test" src="Image/User.jpg"
-			style="width: 45px">
+		<form th:action="@{/Logout}">
+			<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+					role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+						class="fas fa-user fa-fw"
+						th:style="'color:' + @{(${session.loginLevel == 0} ? 'dodgerblue' : 'white')} + ''"></i></a>
+					<ul class="dropdown-menu dropdown-menu-end"
+						aria-labelledby="navbarDropdown">
+						<li><button type="submit" class="dropdown-item">登出</button></li>
+					</ul></li>
+			</ul>
+		</form>
 	</nav>
 	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav">
@@ -71,98 +82,64 @@
 			</nav>
 		</div>
 		<div id="layoutSidenav_content" class="container">
-			<main>
-				<div class="row">
-					<div class="col-12">
-						<h3>流水帳分類管理</h3>
-					</div>
-					<div class="col-12">
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#">流水帳紀錄</a></li>
-								<li class="breadcrumb-item active" aria-current="page">流水帳分類管理</li>
-							</ol>
-						</nav>
-					</div>
-					<div class="col-12">
-					<form action="#" th:action="@{/CategoryDetail}"
-							th:object="${user}">
-							<input type="submit" value="Add" />
-						</form>
-						<input type="submit"
-							value="Del">
-					</div>
-					<div class="col-12">
-						<div class="container-fluid px-4">
+			<form method="post" th:action="@{/CategoryList}">
+				<main>
+					<div class="row">
+						<div class="col-12">
+							<h3>流水帳分類管理</h3>
+						</div>
+						<div class="col-12">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">流水帳紀錄</a></li>
+									<li class="breadcrumb-item active" aria-current="page">流水帳分類管理</li>
+								</ol>
+							</nav>
+						</div>
+						<div class="col-12">
+
+							<input type="submit" value="Add" name="btnAdd" id="btnAdd" /> 
+							<input type="submit"
+								value="Del" id="btnDel" name="btnDel"
+								onclick="return confirm('按下確定即刻刪除該分類(但若該分類中有流水帳紀錄則無法執行)')">
 
 
+						</div>
+						<div class="col-12">
+							<div class="container-fluid px-4">
+								<div class="card mb-4">
+									<div class="card-body">
+										<table id="datatablesSimple">
+											<thead>
+												<tr>
+													<th></th>
+													<th>建立日期</th>
+													<th>分類</th>
+													<th>流水帳數目</th>
+													<th>Act</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="item : ${list}">
+													<td><input type="checkbox" id="cblDel" name="cblDel"
+														th:value="${item.ID}"></td>
+													<td th:text="${item.createtime}"></td>
+													<td th:text="${item.categoryname}"></td>
+													<td th:text="${item.count}"></td>
+													<td><a
+														th:href="@{CategoryDetail(CategoryID=${item.ID})}">Edit</a></td>
+												</tr>
 
-							<div class="card mb-4">
-
-								<div class="card-body">
-									<table id="datatablesSimple">
-										<thead>
-											<tr>
-												<th></th>
-												<th>建立日期</th>
-												<th>分類</th>
-												<th>流水帳數目</th>
-												<th>Act</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>5</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>5</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>5</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>5</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>5</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>5</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-
-										</tbody>
-									</table>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
-				</div>
-			</main>
+					</div>
+				</main>
+			</form>
 			<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid px-4">
 					<div
