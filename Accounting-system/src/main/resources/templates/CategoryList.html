@@ -9,6 +9,7 @@
 <script src="Jquery/jquery-3.6.0.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
 </head>
 <body class="sb-nav-fixed">
 
@@ -81,7 +82,7 @@
 				</div>
 			</nav>
 		</div>
-		<div id="layoutSidenav_content" class="container">
+		<div id="layoutSidenav_content" class="container">		
 			<form method="post" th:action="@{/CategoryList}">
 				<main>
 					<div class="row">
@@ -97,11 +98,12 @@
 							</nav>
 						</div>
 						<div class="col-12">
+							<h2 th:text="${message}"></h2>
 
-							<input type="submit" value="Add" name="btnAdd" id="btnAdd" /> 
-							<input type="submit"
-								value="Del" id="btnDel" name="btnDel"
-								onclick="return confirm('按下確定即刻刪除該分類(但若該分類中有流水帳紀錄則無法執行)')">
+							<a href="/CategoryDetail" class="btn btn-primary">Add</a> <input
+								type="submit" value="Del" id="btnDel" name="btnDel"
+								onclick="return confirm('按下確定即刻刪除該分類(但若該分類中有流水帳紀錄則無法執行)')"
+								class="btn btn-primary">
 
 
 						</div>
@@ -122,12 +124,12 @@
 											<tbody>
 												<tr th:each="item : ${list}">
 													<td><input type="checkbox" id="cblDel" name="cblDel"
-														th:value="${item.ID}"></td>
-													<td th:text="${item.createtime}"></td>
-													<td th:text="${item.categoryname}"></td>
-													<td th:text="${item.count}"></td>
+														th:value="${item.getID}"></td>
+													<td th:text="${item.getcreatetime}"></td>
+													<td th:text="${item.getcategoryname}"></td>
+													<td th:text="${item.getCount}"></td>
 													<td><a
-														th:href="@{CategoryDetail(CategoryID=${item.ID})}">Edit</a></td>
+														th:href="@{CategoryDetail(CategoryID=${item.getID})}">Edit</a></td>
 												</tr>
 
 											</tbody>

@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 
 import com.ubayKyu.accountingSystem.repository.CategoryRepository;
@@ -52,10 +54,11 @@ public class CategoryDetailController {
 
 		return "CategoryDetail";
 	}
-
+	@PostMapping
 	@RequestMapping(value = "/CategoryDetail", method = RequestMethod.POST)
 	public String CategoryDetail(@RequestParam("Title") String Title, @RequestParam("Inner") String Inner,
-			HttpServletRequest request) {
+			HttpServletRequest request,
+			RedirectAttributes redirAttrs) {
 		// 登入判斷
 		Object Logined = request.getSession().getAttribute("loginLevel");
 
@@ -66,12 +69,8 @@ public class CategoryDetailController {
 		String categoryname = Title;
 		String userid = request.getSession().getAttribute("userid").toString();
 		categoryRepository.CreateNewCategory(categoryname,userid);
-		return "/CategoryList";
+		return "redirect:/CategoryList";
 
 	}
-//
-//	@GetMapping("/CategoryDetail/{id}")
-//	public String CategoryDetailEdit() {
-//		return "CategoryDetail";
-//	}
+
 }
