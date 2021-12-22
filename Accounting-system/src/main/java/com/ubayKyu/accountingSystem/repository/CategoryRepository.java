@@ -35,12 +35,21 @@ public interface CategoryRepository extends JpaRepository<CategoryModel, String>
 	@Query(value = "select categoryname from  [AccountingNote].[dbo].[CategoryList] WHERE ID = ?1", nativeQuery = true)
 	String getCategoryDetailName(String ID);
 
+	@Query(value = "select categorybody from  [AccountingNote].[dbo].[CategoryList] WHERE ID = ?1", nativeQuery = true)
+	String getCategoryDetailBody(String ID);
 	// 新增分類
 	@Modifying
-	@Query(value = "INSERT INTO CategoryList \r\n" + "	(categoryname\r\n" + "	,createtime\r\n"
-			+ "	,[CategoryList].Count\r\n" + "	,userid)\r\n" + "VALUES \r\n" + "	(?1\r\n" + "	,getdate()\r\n"
-			+ "	,0\r\n" + "	,?2); ", nativeQuery = true)
-	Integer CreateNewCategory(String categoryname, String userid);
+	@Query(value = "INSERT INTO [dbo].[CategoryList]\r\n"
+			+ "           ([categoryname]\r\n"
+			+ "           ,[createtime]\r\n"
+			+ "           ,[userid]\r\n"
+			+ "           ,[categorybody])\r\n"
+			+ "     VALUES\r\n"
+			+ "           (?1\r\n"
+			+ "           ,GETDATE()\r\n"
+			+ "           ,?2\r\n"
+			+ "           ,?3) ", nativeQuery = true)
+	Integer CreateNewCategory(String categoryname, String userid,String categorybody);
 
 	// 刪除分類
 	@Modifying
@@ -51,5 +60,25 @@ public interface CategoryRepository extends JpaRepository<CategoryModel, String>
 
 	@Query(value = "SELECT COUNT([dbo].[CategoryList].ID) FROM [dbo].[CategoryList] LEFT JOIN Accounting ON [dbo].[CategoryList].ID = Accounting.category WHERE [dbo].Accounting.category = ?1", nativeQuery = true)
 	Integer checkCateCount(String id);
-
+	
+	//確認流水帳分類是否存在
+	@Query(value = "SELECT * FROM [AccountingNote].[dbo].[CategoryList]\r\n"
+			+ "WHERE categoryname= ?1 AND  categorybody= ?2 AND userid= ?3", nativeQuery = true)
+	List<CategoryModel> checkCategoryExist(String categoryname,String categorybody,String userid);
+	
+	@Query(value = "SELECT * FROM [AccountingNote].[dbo].[CategoryList]\r\n"
+			+ "WHERE ID = ?1 ", nativeQuery = true)
+	List<CategoryModel> checkCategoryExistById(String CategoryId);
+	//確認是否名稱重複
+	@Query(value = "SELECT * FROM [AccountingNote].[dbo].[CategoryList]\r\n"
+			+ "WHERE userid = ?1 AND categoryname = ?2", nativeQuery = true)
+	List<CategoryModel> checkCategoryExistByIdAndName(String userid,String categoryname);
+	//編輯分類
+	@Modifying
+	@Query(value = "UPDATE [dbo].[CategoryList]\r\n"
+			+ "   SET \r\n"
+			+ "   [categoryname] = ?1   \r\n"
+			+ "   ,[categorybody] = ?2\r\n"
+			+ " WHERE  ID =?3", nativeQuery = true)
+	void updateCate(String categoryname,String categorybody,String CategoryID);
 }

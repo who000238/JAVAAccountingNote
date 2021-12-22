@@ -95,12 +95,13 @@
 						</nav>
 					</div>
 					<div class="col-12">
-						<form th:action="@{/CategoryDetail}" method="post"
+						<h2 th:text="${message}"></h2>
+						<form action="" id="form1" method="post"
 							style="margin: 0 auto" class="container">
 							<table>
 								<tr>
 									<td>標題 <input type="text" name="Title" id="Title"
-										th:value="${Title}"> <br /> <br /> 備註 <textarea
+										th:value="${Title}" size="20"> <br /> <br /> 備註 <textarea
 											rows="2" cols="20" name="Inner" id="Inner" th:text="${Inner}"></textarea></td>
 								</tr>
 							</table>

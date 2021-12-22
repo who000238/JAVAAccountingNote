@@ -16,7 +16,7 @@ public class CategoryModel {
 
 	public String categoryname;
 	public LocalDateTime createtime;
-	public Integer Count;
+	
 	public String userid;
 	public String categorybody;
 
@@ -44,13 +44,6 @@ public class CategoryModel {
 		this.createtime = createtime;
 	}
 
-	public Integer getCount() {
-		return Count;
-	}
-
-	public void setCount(Integer count) {
-		Count = count;
-	}
 
 	public String getUserid() {
 		return userid;
