@@ -11,11 +11,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Accounting")
-public class AccountingNote {
+public class AccountingModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private Integer ID;
+	private String ID;
 	//	使用者辨識碼
 	@Column(name = "userid")
 	private String userid;
@@ -30,17 +30,17 @@ public class AccountingNote {
 	private Integer acttype;
 	//	建立時間
 	@Column(name = "createdate")
-	private LocalDateTime createdate;
+	private String createdate;
 	//	備註
 	@Column(name = "body")
 	private String body;
 	//	分類辨識碼
 	@Column(name = "category")
 	private String category;
-	public Integer getID() {
+	public String getID() {
 		return ID;
 	}
-	public void setID(Integer iD) {
+	public void setID(String iD) {
 		ID = iD;
 	}
 	public String getUserid() {
@@ -59,7 +59,7 @@ public class AccountingNote {
 		return amount;
 	}
 	public void setAmount(Integer amount) {
-		this.amount = amount;
+		this.amount = Math.abs(amount);
 	}
 	public Integer getActtype() {
 		return acttype;
@@ -67,10 +67,10 @@ public class AccountingNote {
 	public void setActtype(Integer acttype) {
 		this.acttype = acttype;
 	}
-	public LocalDateTime getCreatedate() {
+	public String getCreatedate() {
 		return createdate;
 	}
-	public void setCreatedate(LocalDateTime createdate) {
+	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
 	}
 	public String getBody() {

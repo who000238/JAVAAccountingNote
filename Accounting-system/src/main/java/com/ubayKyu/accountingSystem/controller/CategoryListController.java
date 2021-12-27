@@ -23,7 +23,7 @@ public class CategoryListController {
 	@Autowired
 	CategoryRepository categoryRepository;
 
-
+	// 顯示
 	@GetMapping("/CategoryList")
 	public String CategoryList(Model model, HttpServletRequest request) {
 		// 登入判斷
@@ -42,12 +42,14 @@ public class CategoryListController {
 
 	}
 
-
+	// 動作
 	@RequestMapping(value = "/CategoryList", method = RequestMethod.POST)
-	public String CategoryListDel(@RequestParam(value = "cblDel", required = false) String[] categoryDel,
-			@RequestParam(value = "btnAdd", required = false) String btnAdd, HttpServletRequest request,
+	public String CategoryListDel(
+			@RequestParam(value = "cblDel", required = false) String[] categoryDel,
+			@RequestParam(value = "btnAdd", required = false) String btnAdd,
+			HttpServletRequest request,
 			RedirectAttributes redirAttrs) {
-	
+		//Add按鈕動作
 		String temp = btnAdd;
 		if (temp != null) {
 			return "CategoryDetail";

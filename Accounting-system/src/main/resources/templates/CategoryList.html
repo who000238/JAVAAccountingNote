@@ -63,9 +63,9 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 個人資訊
-						</a>
-						<div class="sb-sidenav-menu-heading">流水帳紀錄</div>
-						<a class="nav-link" href="AccountingDetail">
+						</a> <a class="nav-link" href="AccountingList">
+							<div class="sb-sidenav-menu-heading">流水帳紀錄</div>
+						</a> <a class="nav-link" href="AccountingDetail">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 流水帳管理
@@ -82,7 +82,7 @@
 				</div>
 			</nav>
 		</div>
-		<div id="layoutSidenav_content" class="container">		
+		<div id="layoutSidenav_content" class="container">
 			<form method="post" th:action="@{/CategoryList}">
 				<main>
 					<div class="row">
@@ -92,7 +92,7 @@
 						<div class="col-12">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="#">流水帳紀錄</a></li>
+									<li class="breadcrumb-item"><a href="AccountingList">流水帳紀錄</a></li>
 									<li class="breadcrumb-item active" aria-current="page">流水帳分類管理</li>
 								</ol>
 							</nav>
@@ -100,7 +100,8 @@
 						<div class="col-12">
 							<h2 th:text="${message}"></h2>
 
-							<a href="/CategoryDetail" class="btn btn-primary">Add</a> <input
+							<a href="/CategoryDetail" class="btn btn-primary">Add</a> 
+							<input
 								type="submit" value="Del" id="btnDel" name="btnDel"
 								onclick="return confirm('按下確定即刻刪除該分類(但若該分類中有流水帳紀錄則無法執行)')"
 								class="btn btn-primary">

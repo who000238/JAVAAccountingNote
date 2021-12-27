@@ -61,9 +61,9 @@
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 個人資訊
-						</a>
-						<div class="sb-sidenav-menu-heading">流水帳紀錄</div>
-						<a class="nav-link" href="AccountingDetail">
+						</a> <a class="nav-link" href="AccountingList">
+							<div class="sb-sidenav-menu-heading">流水帳紀錄</div>
+						</a> <a class="nav-link" href="AccountingDetail">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 流水帳管理
@@ -81,111 +81,78 @@
 			</nav>
 		</div>
 		<div id="layoutSidenav_content">
-			<main>
-				<div class="row">
-					<div class="col-12">
-						<h3>流水帳管理</h3>
-					</div>
-					<div class="col-12">
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#">流水帳紀錄</a></li>
-								<li class="breadcrumb-item active" aria-current="page">流水帳管理</li>
-							</ol>
-						</nav>
-					</div>
-					<div class="col-12">
-						<form action="#" th:action="@{/AccountingDetail}"
-							th:object="${user}">
-							<input type="submit" value="Add" />
-						</form>
-						<input type="submit" value="Del"> &nbsp;&nbsp; <span>小計---元</span>
-					</div>
-					<div class="col-12">
-						<div class="container-fluid px-4">
+			<form method="post" th:action="@{/AccountingList}">
+				<main>
+					<div class="row">
+						<div class="col-12">
+							<h3>流水帳管理</h3>
+						</div>
+						<div class="col-12">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="AccountingList">流水帳紀錄</a></li>
+									<li class="breadcrumb-item active" aria-current="page">流水帳管理</li>
+								</ol>
+							</nav>
+						</div>
+						<div class="col-12">
+							<h2 th:text="${message}"></h2>
+
+							<a href="/AccountingDetail" class="btn btn-primary">Add</a> 
+							<input
+								type="submit" value="Del" id="btnDel" name="btnDel"
+								onclick="return confirm('確定要刪除?')"
+								class="btn btn-primary">
+							&nbsp;&nbsp; <span>匯總小計 [[${TotalAmount}]] 元</span> <span>本月小計
+								[[${MountAmount}]] 元</span>
+
+
+						</div>
+						<div class="col-12">
+							<div class="container-fluid px-4">
 
 
 
-							<div class="card mb-4">
+								<div class="card mb-4">
 
-								<div class="card-body">
-									<table id="datatablesSimple">
-										<thead>
-											<tr>
-												<th></th>
-												<th>建立日期</th>
-												<th>分類</th>
-												<th>收/支</th>
-												<th>金額</th>
-												<th>標題</th>
-												<th>Act</th>
-											</tr>
-										</thead>
+									<div class="card-body">
+										<table id="datatablesSimple">
+											<thead>
+												<tr>
+													<th></th>
+													<th>建立日期</th>
+													<th>分類</th>
+													<th>收/支</th>
+													<th>金額</th>
+													<th>標題</th>
+													<th>Act</th>
+												</tr>
+											</thead>
 
-										<tbody>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>支出</td>
-												<td>$320,800</td>
-												<td>購物</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>支出</td>
-												<td>$320,800</td>
-												<td>購物</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>支出</td>
-												<td>$320,800</td>
-												<td>購物</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>支出</td>
-												<td>$320,800</td>
-												<td>購物</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>支出</td>
-												<td>$320,800</td>
-												<td>購物</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-											<tr>
-												<td><input type="checkbox"></td>
-												<td>2021/12/1</td>
-												<td>分類1</td>
-												<td>支出</td>
-												<td>$320,800</td>
-												<td>購物</td>
-												<td><a href="#">Edit</a></td>
-											</tr>
-										</tbody>
-									</table>
+											<tbody>
+												<tr th:each="item : ${list}">
+													<td><input type="checkbox" id="cblDel" name="cblDel"
+														th:value="${item.getID}"></td>
+													<td th:text="${item.getcreatedate}"></td>
+													<td th:text="${item.getcategoryname}"></td>
+													<td th:text="${item.getacttype} == 1 ? '收入' : '支出'"></td>
+													<td
+														th:styleappend="${item.getacttype} == 1 ? 'color:Blue;' : 'color:Red;'"
+														th:text="${item.getamount}"></td>
+													<td th:text="${item.getcaption}"></td>
+													<td><a
+														th:href="@{AccountingDetail(AccountingID=${item.getID})}">Edit</a></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
-				</div>
-			</main>
+					</div>
+				</main>
+			</form>
 			<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid px-4">
 					<div

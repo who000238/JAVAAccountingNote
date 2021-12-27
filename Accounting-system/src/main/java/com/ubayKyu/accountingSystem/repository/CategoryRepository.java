@@ -31,6 +31,9 @@ public interface CategoryRepository extends JpaRepository<CategoryModel, String>
 
 	@Query(value = "select * from  [AccountingNote].[dbo].[CategoryList] WHERE ID = ?1", nativeQuery = true)
 	List<CategoryModel> getCategoryDetail(String ID);
+	
+	@Query(value = "select * from  [AccountingNote].[dbo].[CategoryList] WHERE userid = ?1", nativeQuery = true)
+	List<CategoryModel> getCategoryDetailByUserID(String ID);
 
 	@Query(value = "select categoryname from  [AccountingNote].[dbo].[CategoryList] WHERE ID = ?1", nativeQuery = true)
 	String getCategoryDetailName(String ID);
@@ -81,4 +84,8 @@ public interface CategoryRepository extends JpaRepository<CategoryModel, String>
 			+ "   ,[categorybody] = ?2\r\n"
 			+ " WHERE  ID =?3", nativeQuery = true)
 	void updateCate(String categoryname,String categorybody,String CategoryID);
+	
+//	//取得分類名稱
+//	@Query(value="SELECT categoryname FROM [AccountingNote].[dbo].[CategoryList] WHERE userid = ?1", nativeQuery = true)
+//	List<CategoryModel> getCategoryList(String userid);
 }
