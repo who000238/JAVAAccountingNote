@@ -55,5 +55,35 @@ public interface AccountingRepository extends JpaRepository<AccountingModel, Str
 		@Query(value = "SELECT SUM(amount) FROM accounting " + "WHERE userid = ?1 AND acttype = 1 "
 				+ "AND createdate BETWEEN ?2 AND ?3", nativeQuery = true)
 		Integer getMonthTotalGetAmountByUserId(String userId, LocalDateTime startDate, LocalDateTime endDate);
-	
+	// 新增流水帳
+		@Modifying
+		@Query(value="INSERT INTO [dbo].[Accounting]\r\n"
+				+ "           ([userid]\r\n"
+				+ "           ,[caption]\r\n"
+				+ "           ,[amount]\r\n"
+				+ "           ,[acttype]\r\n"
+				+ "           ,[createdate]\r\n"
+				+ "           ,[body]\r\n"
+				+ "           ,[category])\r\n"
+				+ "     VALUES\r\n"
+				+ "           (?1\r\n"
+				+ "           ,?2\r\n"
+				+ "           ,?3\r\n"
+				+ "           ,?4\r\n"
+				+ "           ,getdate()\r\n"
+				+ "           ,?5\r\n"
+				+ "           ,?6)", nativeQuery = true)
+		Integer CreateNewAccounting(String userid,String caption,String amount, String acttype,String body,String category);
+	// 編輯流水帳
+		@Modifying
+		@Query(value="UPDATE [dbo].[Accounting]\r\n"
+				+ "   SET \r\n"
+				+ "      [caption] = ?1\r\n"
+				+ "      ,[amount] = ?2\r\n"
+				+ "      ,[acttype] = ?3\r\n"
+				+ "      ,[createdate] = GETDATE()\r\n"
+				+ "      ,[body] = ?4\r\n"
+				+ "      ,[category] = ?5\r\n"
+				+ " WHERE ID=?6", nativeQuery = true)
+		Integer UpdateAccounting(String caption,String amount,String acttype,String body,String category,String accountingID);
 }

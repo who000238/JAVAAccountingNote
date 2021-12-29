@@ -14,7 +14,7 @@ $(function () {
  	  var category = /*[[${Category}]]*/ ""; 
  	  var acttype = /*[[${ActType}]]*/ ""; 
 	  if( category != null){ 
- 		  $("#PrivateType").val(category); 
+ 		  $("#Category").val(category); 
 	  } 
 	  if( acttype != null){ 
  		  $("#ActType").val(acttype); 
@@ -106,6 +106,7 @@ $(function () {
 							</ol>
 						</nav>
 					</div>
+					<h2 th:text="${message}"></h2>
 					<form method="post" action="" id="form1">
 						<table>
 				
@@ -115,23 +116,23 @@ $(function () {
 										<option value="0">支出</option>
 								</select>
 								<br /> 
-								分類 <select name="PrivateType" id="PrivateType">
-										<option value="">未分類</option>
+								分類 <select name="Category" id="Category">
+										<option value="0">未分類</option>
 										<option th:each="Category:${CategoryList}"
 											th:value="${Category.getID()}">[[${Category.getCategoryname()}]]</option>
 								
 								</select><br />
-								 金額 <input type="number" name="txtAmount" id="txtAmount"
+								 金額 <input type="number" name="Amount" id="Amount"
 									th:value="${Amount}" min="1" max="10000000"
 									style="width: 400px"
 									onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" required
 									placeholder="請輸入金額(不得超過1000萬或是負數)" /><br />
 								<br /> 
-								標題 <input type="text" name="txtCaption" id="txtCaption"
+								標題 <input type="text" name="Caption" id="Caption"
 									th:value="${Caption}" style="width: 400px"
 									placeholder="請輸入標題" /><br />
 								<br /> 
-								備註 <textarea id="txtBody" name="txtBody"
+								備註 <textarea id="Body" name="Body"
 										th:text="${Body}" rows="4" cols="50" placeholder="請輸入備註"></textarea><br />
 								<br /> 
 								<input type="hidden" name="hiddenAccDate"
