@@ -26,6 +26,8 @@ public class UserInfoModel {
 	public Integer USERLEVEL;
 	//@Column(name="CREATE_DATE", length=50, nullable=false, unique=false)
 	public String CREATEDATE;
+	public String EDITDATE;
+
 	public String getID() {
 		return ID;
 	}
@@ -63,7 +65,12 @@ public class UserInfoModel {
 		CREATEDATE = cREATEDATE;
 	}
 	
-	
+	public String getEDITDATE() {
+		return EDITDATE;
+	}
+	public void setEDITDATE(String eDITDATE) {
+		EDITDATE = eDITDATE;
+	}
 	
 	
 }

@@ -34,7 +34,7 @@ public class UserProfileController {
 //		}
 		//取得使用者ID
 		String userid = request.getSession().getAttribute("userid").toString();
-		List<UserInfoModel> list = userInfoRepository.getFindAll(userid);
+		List<UserInfoModel> list = userInfoRepository.getUserInfoByID(userid);
 //		Optional<UserInfoModel> UserInfoModel = userInfoService.getUserInfoByID(userid);
 		model.addAttribute("Account",list.get(0).getAccount());
 		model.addAttribute("Name", list.get(0).getName());

@@ -10,6 +10,25 @@ l>
 <script src="Jquery/jquery-3.6.0.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<script th:inline="javascript">
+	$(function() {
+		var userlevel = /*[[${UserLevel}]]*/"";
+
+		if (userlevel != null) {
+			$("#UserLevel").val(userlevel);
+		}
+		
+		const urlParams = new URLSearchParams(window.location.search);
+		const myParam = urlParams.get('UserID')
+		if(myParam != null){
+			document.getElementById("AccInput").style.display = "none";
+		}else{
+			document.getElementById("AccSpan").style.display = "none";
+		}
+			
+	});
+
+</script>
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -62,11 +81,9 @@ l>
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-columns"></i>
 							</div> 個人資訊
-						</a>
-				 <a class="nav-link" href="AccountingList">
+						</a> <a class="nav-link" href="AccountingList">
 							<div class="sb-sidenav-menu-heading">流水帳紀錄</div>
-						</a> 
-						<a class="nav-link" href="AccountingDetail">
+						</a> <a class="nav-link" href="AccountingDetail">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-chart-area"></i>
 							</div> 流水帳管理
@@ -97,7 +114,42 @@ l>
 							</ol>
 						</nav>
 					</div>
-					<div class="col-12">帳號&nbsp; -----</div>
+					<div>
+						<table>
+							<tr>
+								<td>帳號</td>
+								<td>
+								<span id="AccSpan" class="AccSpan">[[${Account}]]</span>
+								<input type="text" th:value="${Account}" id="AccInput" class="AccInput"></td>
+								
+							</tr>
+							<tr>
+								<td>姓名</td>
+								<td><input type="text" th:value="${Name}"></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td><input type="email" th:value="${Mail}"></td>
+							</tr>
+							<tr>
+								<td>等級</td>
+								<td><select name="UserLevel" id="UserLevel">
+										<option value="0">管理員</option>
+										<option value="1">一般使用者</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td>建立時間</td>
+								<td>[[${CreateDate}]]</td>
+							</tr>
+							<tr>
+								<td>修改時間</td>
+								<td>[[${EditDate}]]</td>
+							</tr>
+						</table>
+					</div>
+					>
+					<!-- 	<div class="col-12">帳號&nbsp; -----</div>
 					<div class="col-12">
 						姓名&nbsp; <input type="text">
 					</div>
@@ -112,7 +164,7 @@ l>
 					</div>
 					<div class="col-12">
 						建立時間 -----<br>修改時間 -----
-					</div>
+					</div> -->
 					<div class="col-12">
 						<input type="submit" value="Save">&nbsp;<input
 							type="submit" value="Delete">
