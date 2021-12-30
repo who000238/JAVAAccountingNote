@@ -69,10 +69,15 @@ public class AccountingDetailController {
 
 	// 動作
 	@PostMapping(value = "/AccountingDetail")
-	public String AccountingDetail(@RequestParam(value = "AccountingID", required = false) String AccountingID,
-			@RequestParam("ActType") String ActType, @RequestParam("Category") String Category,
-			@RequestParam("Amount") String Amount, @RequestParam("Caption") String Caption,
-			@RequestParam("Body") String Body, RedirectAttributes redirAttrs, HttpServletRequest request) {
+	public String AccountingDetail(
+			@RequestParam(value = "AccountingID", required = false) String AccountingID,
+			@RequestParam("ActType") String ActType,
+			@RequestParam("Category") String Category,
+			@RequestParam("Amount") String Amount,
+			@RequestParam("Caption") String Caption,
+			@RequestParam("Body") String Body, 
+			RedirectAttributes redirAttrs,
+			HttpServletRequest request) {
 		// 登入判斷
 		Object Logined = request.getSession().getAttribute("loginLevel");
 

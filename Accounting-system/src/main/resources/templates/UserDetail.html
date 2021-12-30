@@ -17,17 +17,16 @@ l>
 		if (userlevel != null) {
 			$("#UserLevel").val(userlevel);
 		}
-		
+
 		const urlParams = new URLSearchParams(window.location.search);
 		const myParam = urlParams.get('UserID')
-		if(myParam != null){
+		if (myParam != null) {
 			document.getElementById("AccInput").style.display = "none";
-		}else{
+		} else {
 			document.getElementById("AccSpan").style.display = "none";
 		}
-			
-	});
 
+	});
 </script>
 </head>
 <body class="sb-nav-fixed">
@@ -101,76 +100,65 @@ l>
 			</nav>
 		</div>
 		<div id="layoutSidenav_content">
-			<main>
-				<div class="row">
-					<div class="col-12">
-						<h3>會員管理</h3>
+			<form method="post" action="" id="form1">
+				<main>
+					<div class="row">
+						<div class="col-12">
+							<h3>會員管理</h3>
+						</div>
+						<div class="col-12">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">管理者後台</a></li>
+									<li class="breadcrumb-item active" aria-current="page">會員管理</li>
+								</ol>
+							</nav>
+						</div>
+						<h2 th:text="${message}"></h2>
+						<div>
+							<table>
+								<tr>
+									<td>帳號</td>
+									<td><span id="AccSpan" class="AccSpan">[[${Account}]]</span>
+										<input type="text" th:value="${Account}" id="AccInput"
+										name="AccInput" class="AccInput" required="required"></td>
+
+								</tr>
+								<tr>
+									<td>姓名</td>
+									<td><input type="text" th:value="${Name}" name="Name"
+										required="required"></td>
+								</tr>
+								<tr>
+									<td>Email</td>
+									<td><input type="email" th:value="${Mail}" name="Mail"
+										required="required"></td>
+								</tr>
+								<tr>
+									<td>等級</td>
+									<td><select name="UserLevel" id="UserLevel">
+											<option value="0">管理員</option>
+											<option value="1">一般使用者</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td>建立時間</td>
+									<td>[[${CreateDate}]]</td>
+								</tr>
+								<tr>
+									<td>修改時間</td>
+									<td>[[${EditDate}]]</td>
+								</tr>
+							</table>
+						</div>
+
+						<div class="col-12">
+							<input type="submit" value="Save" class="btn btn-primary">&nbsp;
+	<a href="/UserList" class="btn btn-primary">Cancel</a> 
+						</div>
 					</div>
-					<div class="col-12">
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#">管理者後台</a></li>
-								<li class="breadcrumb-item active" aria-current="page">會員管理</li>
-							</ol>
-						</nav>
-					</div>
-					<div>
-						<table>
-							<tr>
-								<td>帳號</td>
-								<td>
-								<span id="AccSpan" class="AccSpan">[[${Account}]]</span>
-								<input type="text" th:value="${Account}" id="AccInput" class="AccInput"></td>
-								
-							</tr>
-							<tr>
-								<td>姓名</td>
-								<td><input type="text" th:value="${Name}"></td>
-							</tr>
-							<tr>
-								<td>Email</td>
-								<td><input type="email" th:value="${Mail}"></td>
-							</tr>
-							<tr>
-								<td>等級</td>
-								<td><select name="UserLevel" id="UserLevel">
-										<option value="0">管理員</option>
-										<option value="1">一般使用者</option>
-								</select></td>
-							</tr>
-							<tr>
-								<td>建立時間</td>
-								<td>[[${CreateDate}]]</td>
-							</tr>
-							<tr>
-								<td>修改時間</td>
-								<td>[[${EditDate}]]</td>
-							</tr>
-						</table>
-					</div>
-					>
-					<!-- 	<div class="col-12">帳號&nbsp; -----</div>
-					<div class="col-12">
-						姓名&nbsp; <input type="text">
-					</div>
-					<div class="col-12">
-						Email&nbsp; <input type="email">
-					</div>
-					<div class="col-12">
-						等級&nbsp; <select>
-							<option>管理者</option>
-							<option>一般使用者</option>
-						</select>
-					</div>
-					<div class="col-12">
-						建立時間 -----<br>修改時間 -----
-					</div> -->
-					<div class="col-12">
-						<input type="submit" value="Save">&nbsp;<input
-							type="submit" value="Delete">
-					</div>
-				</div>
-			</main>
+				</main>
+			</form>
 			<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid px-4">
 					<div
