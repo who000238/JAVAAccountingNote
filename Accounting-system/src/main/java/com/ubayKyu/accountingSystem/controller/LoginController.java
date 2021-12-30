@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ubayKyu.accountingSystem.repository.LoginRepository;
 
@@ -32,7 +33,8 @@ public class LoginController {
 
 	@PostMapping("/Login")
 	public String doLogin(@RequestParam("account") String account, @RequestParam("password") String password,
-			Map<String, Object> map, HttpSession session) {
+			Map<String, Object> map, HttpSession session,
+			RedirectAttributes redirAttrs) {
 		if(loginRepository.doLogin(account)!=null) {
 			String userAcc = loginRepository.doLogin(account).Account;
 			String userPwd = loginRepository.doLogin(account).PWD;
@@ -40,7 +42,7 @@ public class LoginController {
 			if(userAcc.equals(account)&& userPwd.equals(password)) {
 				session.setAttribute("loginLevel", loginRepository.doLogin(account).USERLEVEL);
 				session.setAttribute("userid", loginRepository.doLogin(account).getID());
-				return "UserProfile";
+				return "redirect:/UserProfile";
 			}
 		    else {
 	        	map.put("msg", "帳號或密碼錯誤");

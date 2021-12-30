@@ -1,11 +1,12 @@
 //package com.ubayKyu.accountingSystem.service;
 //
 //import java.util.List;
+//import java.util.Optional;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //
-//import com.ubayKyu.accountingSystem.entity.UserInfo;
+//import com.ubayKyu.accountingSystem.entity.UserInfoModel;
 //import com.ubayKyu.accountingSystem.repository.UserInfoRepository;
 //
 //@Service
@@ -13,21 +14,7 @@
 //	@Autowired
 //	private UserInfoRepository repository;
 //	
-//	public List<UserInfo> getUserInfos(){
-//		return repository.findAll();
-//	}
-//	
-//	//test
-//	public UserInfo saveUserInfo(UserInfo UserInfo) {
-//		return repository.save(UserInfo);
-//	}
-//	
-//	public List<UserInfo> getUserInfoById(List<Integer> ids){
-//		return repository.findAllById(ids);
-//	}
-//	
-//	public String deleteUserInfo(int id) {
-//		repository.deleteById(id);
-//		return "Deleted!";
+//	public Optional<UserInfoModel> getUserInfoByID(String userid){
+//		return repository.findById(userid);
 //	}
 //}

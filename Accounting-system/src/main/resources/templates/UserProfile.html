@@ -9,11 +9,7 @@
 <script src="Jquery/jquery-3.6.0.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-<style type="text/css">
-.divA {
-	border: 1px;
-}
-</style>
+
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -88,47 +84,47 @@
 			</nav>
 		</div>
 		<div id="layoutSidenav_content">
-			<main>
-				<div class="row">
-					<div class="col-12">
-						<h3>目前頁面</h3>
-					</div>
-					<div class="col-12">
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#">後台管理</a></li>
-								<li class="breadcrumb-item active" aria-current="page">個人資訊</li>
-							</ol>
-						</nav>
-					</div>
-					<div class="divA">
-						<div class="col-2">
-							<span>帳號</span>
+			<form method="post" action="" id="form1">
+				<main>
+					<div class="row">
+						<div class="col-12">
+							<h3>目前頁面</h3>
 						</div>
-						<div class="col5 disable">
-							<input type="text" value="Admin123" disabled>
+						<div class="col-12">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">後台管理</a></li>
+									<li class="breadcrumb-item active" aria-current="page">個人資訊</li>
+								</ol>
+							</nav>
 						</div>
-						<div class="col5"></div>
-						<div class="col-2">
-							<span>姓名</span>
+						<h2 th:text="${message}"></h2>
+						<div class="col-12">
+							<table style="border: 1px solid black; width: 100%;">
+								<tr>
+									<td style="border: 1px solid black;">帳號</td>
+									<td style="border: 1px solid black;"><input type="text"
+										name="Account" id="Account" th:value="${Account}" disabled>
+									</td>
+								</tr>
+								<tr>
+									<td style="border: 1px solid black;">姓名</td>
+									<td style="border: 1px solid black;"><input type="text"
+										name="Name" id="Name" th:value="${Name}" required="required"></td>
+								</tr>
+								<tr>
+									<td style="border: 1px solid black;">Email</td>
+									<td style="border: 1px solid black;"><input type="email"
+										name="Mail" id="Mail" th:value="${Mail}" required="required"></td>
+								</tr>
+							</table>
 						</div>
-						<div class="col5">
-							<input type="text" value="Name">
-						</div>
-						<div class="col5"></div>
-						<div class="col-2">
-							<span>帳號</span>
-						</div>
-						<div class="col5">
-							<input type="email" value="A@com">
-						</div>
-						<div class="col5"></div>
 						<div class="col-12">
 							<input type="submit" value="存檔">
 						</div>
 					</div>
-				</div>
-			</main>
+				</main>
+			</form>
 			<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid px-4">
 					<div
