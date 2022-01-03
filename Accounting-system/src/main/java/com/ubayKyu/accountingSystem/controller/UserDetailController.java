@@ -3,6 +3,7 @@ package com.ubayKyu.accountingSystem.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,19 +25,25 @@ public class UserDetailController {
 	@GetMapping("/UserDetail")
 	public String UserDetail(Model model, @RequestParam(value = "UserID", required = false) String UserID,
 			HttpServletRequest request, RedirectAttributes redirAttrs) {
-		//判斷登入
+		// 判斷登入
 		Object Logined = request.getSession().getAttribute("loginLevel");
 
 		if (Logined == null) {
 			return "Login";
 		}
-		//判斷使用者等級
-		Integer UserLevel = (Integer)request.getSession().getAttribute("loginLevel");
-		if(UserLevel != 0) {
+		// 判斷使用者等級
+		Integer UserLevel = (Integer) request.getSession().getAttribute("loginLevel");
+		if (UserLevel != 0) {
 			return "redirect:/UserProfile";
 		}
 		// 若帶有QueryString
 		if (UserID != null) {
+			// 不讓管理者更改自己帳號的權限
+			String QueryID = request.getSession().getAttribute("userid").toString();
+			if (UserID.equals(QueryID)) {
+				
+				model.addAttribute("DDLoff","DDLoff");
+			}
 
 			List<UserInfoModel> list = userInfoRepository.getUserInfoByID(UserID);
 			// 確認該UserID在DB中有相對應資料
@@ -65,8 +72,8 @@ public class UserDetailController {
 			@RequestParam(value = "AccInput", required = false) String AccInput, @RequestParam("Name") String Name,
 			@RequestParam("Mail") String Mail, @RequestParam("UserLevel") String UserLevel,
 			RedirectAttributes redirAttrs, HttpServletRequest request) {
-		//檢查輸入帳號長度
-		if(AccInput.length()>20) {
+		// 檢查輸入帳號長度
+		if (AccInput.length() > 20) {
 			redirAttrs.addFlashAttribute("message", "帳號請勿超過20字元");
 			return "redirect:/UserDetail";
 		}

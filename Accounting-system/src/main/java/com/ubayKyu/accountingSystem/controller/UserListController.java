@@ -71,6 +71,11 @@ public class UserListController {
 			if (UserDel != null) {
 				for (String DelUserID : UserDel) // 用for跑字串陣列內的數值
 				{
+					if(DelUserID.equals(userid)) {
+						redirAttrs.addFlashAttribute("message", "無法刪除自己");
+						return "redirect:/UserList";
+					}
+					
 					List<UserInfoModel> UserInfo = userInfoRepository.getUserInfoByID(DelUserID);
 					String userName = UserInfo.get(0).getName();
 					//刪除會員資料

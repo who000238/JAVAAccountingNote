@@ -13,19 +13,23 @@ l>
 <script th:inline="javascript">
 	$(function() {
 		var userlevel = /*[[${UserLevel}]]*/"";
-
+		
 		if (userlevel != null) {
-			$("#UserLevel").val(userlevel);
+			$("#UserLevelDDL").val(userlevel);
 		}
 
 		const urlParams = new URLSearchParams(window.location.search);
-		const myParam = urlParams.get('UserID')
+		const myParam = urlParams.get('UserID')			
+		
 		if (myParam != null) {
 			document.getElementById("AccInput").style.display = "none";
 		} else {
 			document.getElementById("AccSpan").style.display = "none";
 		}
-
+		var DDLoff = /*[[${DDLoff}]]*/"";
+		if(DDLoff != null){
+			document.getElementById("UserLevelDDL").disabled=true;
+		}
 	});
 </script>
 </head>
@@ -109,7 +113,7 @@ l>
 						<div class="col-12">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="#">管理者後台</a></li>
+									<li class="breadcrumb-item"><a href="UserList">管理者後台</a></li>
 									<li class="breadcrumb-item active" aria-current="page">會員管理</li>
 								</ol>
 							</nav>
@@ -136,7 +140,7 @@ l>
 								</tr>
 								<tr>
 									<td>等級</td>
-									<td><select name="UserLevel" id="UserLevel">
+									<td><select name="UserLevel" id="UserLevelDDL">
 											<option value="0">管理員</option>
 											<option value="1">一般使用者</option>
 									</select></td>
