@@ -9,7 +9,18 @@
 <script src="Jquery/jquery-3.6.0.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-
+<script type="text/javascript">
+$(function () { // Session判斷登入身分
+		var level = "[[${session.loginLevel}]]";
+		if(level == 1)
+			{//隱藏後台超連結
+			document.getElementById("managerDiv").style.display = "none";
+			document.getElementById("managerA").style.display = "none";
+			
+			}
+		}
+);
+</script>
 </head>
 <body class="sb-nav-fixed">
 
@@ -52,8 +63,8 @@
 				id="sidenavAccordion">
 				<div class="sb-sidenav-menu">
 					<div class="nav">
-						<div class="sb-sidenav-menu-heading">管理者後台</div>
-						<a class="nav-link" href="UserList">
+					<div class="sb-sidenav-menu-heading" id="managerDiv">管理者後台</div>
+						<a class="nav-link" id="managerA" href="UserList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 會員管理

@@ -33,10 +33,15 @@ public class UserListController {
 
 	@GetMapping("/UserList")
 	public String UserList(Model model, HttpServletRequest request, RedirectAttributes redirAttrs) {
+		//判斷登入
 		Object Logined = request.getSession().getAttribute("loginLevel");
-
 		if (Logined == null) {
 			return "Login";
+		}
+		//判斷使用者等級
+		Integer UserLevel = (Integer)request.getSession().getAttribute("loginLevel");
+		if(UserLevel != 0) {
+			return "redirect:/UserProfile";
 		}
 //		else {
 //		return "UserList";

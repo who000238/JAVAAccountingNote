@@ -20,6 +20,16 @@ $(function () {
  		  $("#ActType").val(acttype); 
 	  }
  }); 
+$(function () { // Session判斷登入身分
+	var level = "[[${session.loginLevel}]]";
+	if(level == 1)
+		{//隱藏後台超連結
+		document.getElementById("managerDiv").style.display = "none";
+		document.getElementById("managerA").style.display = "none";
+		
+		}
+	}
+);
 </script> 
 </head>
 <body class="sb-nav-fixed">
@@ -62,8 +72,8 @@ $(function () {
 				id="sidenavAccordion">
 				<div class="sb-sidenav-menu">
 					<div class="nav">
-						<div class="sb-sidenav-menu-heading">管理者後台</div>
-						<a class="nav-link" href="UserList">
+						<div class="sb-sidenav-menu-heading" id="managerDiv">管理者後台</div>
+						<a class="nav-link" id="managerA" href="UserList">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-tachometer-alt"></i>
 							</div> 會員管理
@@ -150,33 +160,7 @@ $(function () {
 
 
 						</table>
-					</form>
-					<!-- 		<div class="col-12">
-						<span>收 / 支</span> &nbsp; <select>
-							<option>IN</option>
-							<option>OUT</option>
-						</select>
-					</div>
-					<div class="col-12">
-						<span>分類</span> &nbsp; <select>
-							<option>分類1</option>
-							<option>分類2</option>
-						</select>
-					</div>
-					<div class="col-12">
-						<span>金額</span> &nbsp; <input type="number" style="width: 340px">
-					</div>
-					<div class="col-12">
-						<span>標題</span> &nbsp;
-						<textarea rows="1" cols="40"></textarea>
-					</div>
-					<div class="col-12">
-						<span>備註</span> &nbsp;
-						<textarea rows="4" cols="40"></textarea>
-					</div>
-					<div class="col-12">
-						<input type="submit" value="Save">
-					</div> -->
+					</form>					
 				</div>
 			</main>
 			<footer class="py-4 bg-light mt-auto">

@@ -24,10 +24,16 @@ public class UserDetailController {
 	@GetMapping("/UserDetail")
 	public String UserDetail(Model model, @RequestParam(value = "UserID", required = false) String UserID,
 			HttpServletRequest request, RedirectAttributes redirAttrs) {
+		//判斷登入
 		Object Logined = request.getSession().getAttribute("loginLevel");
 
 		if (Logined == null) {
 			return "Login";
+		}
+		//判斷使用者等級
+		Integer UserLevel = (Integer)request.getSession().getAttribute("loginLevel");
+		if(UserLevel != 0) {
+			return "redirect:/UserProfile";
 		}
 		// 若帶有QueryString
 		if (UserID != null) {
